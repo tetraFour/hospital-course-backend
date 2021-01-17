@@ -20,9 +20,7 @@ const app = new App({
     express.json(),
     express.urlencoded({ extended: true }),
     LoggerMiddleware,
-    cors({
-      origin: process.env.DEVELOPMENT,
-    }),
+    cors(),
   ],
   controllers: [
     new AuthController(),
