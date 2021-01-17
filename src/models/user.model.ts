@@ -6,6 +6,8 @@ export interface IUserModel extends Document {
   email: string;
   login: string;
   password: string;
+  age: string;
+  address: string;
   role: number;
 }
 
@@ -25,6 +27,14 @@ const User = new Schema({
     unique: true,
   },
   password: {
+    type: Schema.Types.String,
+    required: true,
+  },
+  age: {
+    type: Schema.Types.String,
+    required: true,
+  },
+  address: {
     type: Schema.Types.String,
     required: true,
   },

@@ -4,10 +4,15 @@ export interface IDiseaseModel extends Document {
   _id: string;
   diseaseType: string;
   cardId: string;
+  recommendations: string;
 }
 
 const Disease = new Schema({
   diseaseType: {
+    type: Schema.Types.String,
+    required: true,
+  },
+  recommendations: {
     type: Schema.Types.String,
     required: true,
   },
@@ -16,6 +21,7 @@ const Disease = new Schema({
     required: true,
     ref: 'Card',
   },
+
 });
 
 const DiseaseModel = model<IDiseaseModel>('Disease', Disease);

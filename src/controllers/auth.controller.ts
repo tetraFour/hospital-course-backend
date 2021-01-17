@@ -17,23 +17,15 @@ class AuthController implements IControllerBase {
   }
 
   public initRoutes = (): void => {
-    this.router.post(`${this.path}/sign-in`, signInValidation, this.signIn);
+    this.router.post(`${this.path}/sign-in`, this.signIn);
     this.router.post(`${this.path}/sign-up`, signUpValidation, this.signUp);
     this.router.get(`${this.path}/logout`, this.logout);
   };
 
   private signIn = async (req: Request, res: Response) => {
     const { login, password } = req.body;
+    console.log(login, password);
     try {
-      const errors = validationResult(req);
-
-      if (!errors.isEmpty()) {
-        return res.status(400).json({
-          errors: errors.array(),
-          message: 'некорректные данные при входе в аккаунт',
-        });
-      }
-
       const user = await UserModel.findOne({ login });
 
       if (!user) {
@@ -56,6 +48,7 @@ class AuthController implements IControllerBase {
         login: user.login,
         userId: user.id,
         token,
+        role: user.role,
       });
     } catch (error) {
       return res

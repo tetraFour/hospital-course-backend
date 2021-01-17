@@ -6,7 +6,13 @@ import cors from 'cors';
 
 import App from './app';
 import { LoggerMiddleware } from './middleware';
-import { UserController } from './controllers';
+import {
+  UserController,
+  CardController,
+  DiseaseController,
+  DrugController,
+  AuthController,
+} from './controllers';
 
 const app = new App({
   port: parseInt(process.env.PORT as string),
@@ -18,7 +24,13 @@ const app = new App({
       origin: process.env.DEVELOPMENT,
     }),
   ],
-  controllers: [new UserController()],
+  controllers: [
+    new AuthController(),
+    new UserController(),
+    new CardController(),
+    new DiseaseController(),
+    new DrugController(),
+  ],
 });
 
 app.listen();

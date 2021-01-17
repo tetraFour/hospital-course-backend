@@ -16,9 +16,7 @@ class UserController implements IControllerBase {
 
   public initRoutes = (): void => {
     this.router.get(`${this.path}/get-users`, this.getUsers);
-    this.router.get(`${this.path}/get-cards`, this.getCards);
-    this.router.get(`${this.path}/get-diseases`, this.getDiseases);
-    this.router.get(`${this.path}/get-drugs`, this.getDrugs);
+    // this.router.get(`${this.path}/get-drugs`, this.getDrugs);
     this.router.post(`${this.path}/create-user`, this.createUser);
   };
 
@@ -60,38 +58,9 @@ class UserController implements IControllerBase {
       console.log(e);
     }
   };
-  private getDrugs = async (req: Request, res: Response) => {
-    try {
-      const users = await DrugModel.find().populate('diseaseId');
-      console.log(users);
-      // console.log(users);
-      console.log(typeof users[0].id);
-      //@ts-ignore
-      const qwe = await CardModel.findById(users[0].diseaseId.cardId);
-      console.log(qwe);
-      return res.status(200).send(users);
-    } catch (e) {
-      console.log(e);
-    }
-  };
-  private getDiseases = async (req: Request, res: Response) => {
-    try {
-      const users = await DiseaseModel.find().populate('cardId');
-      console.log(users);
-      return res.status(200).send(users);
-    } catch (e) {
-      console.log(e);
-    }
-  };
-  private getCards = async (req: Request, res: Response) => {
-    try {
-      const users = await CardModel.find().populate('userId');
-      console.log(users);
-      return res.status(200).send(users);
-    } catch (e) {
-      console.log(e);
-    }
-  };
+
+
+
 }
 
 export default UserController;
